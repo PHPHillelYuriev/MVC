@@ -1,16 +1,11 @@
 <?php 
-require '../app/Core/Model.php';
-// namespace Model;
-
-// use Core\Model;
-
-
+require_once ROOT . '/Core/Model.php';
 
 class Articles extends Model
 {
     public function getData()
     {
-        $data = require ROOT . '/DB.php';
+        $data = require_once ROOT . '/DB.php';
         
         return $data;
     }

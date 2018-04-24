@@ -1,32 +1,32 @@
 <?php 
-require '../app/Core/View.php';
-require '../app/Core/Controller.php';
-require '../src/Model/Articles.php';
+require ROOT . '/Core/View.php';
+require ROOT . '/Core/Controller.php';
+require ROOT . '/../src/Model/Articles.php';
 
 
 class MainController extends Controller
 {
-    public function actionIndex($action)
+    public function actionIndex($templateName)
     {   
         $model = new Articles;
         $data = $model->getData();
 
-        $this->view->render($action, $data);
+        $this->view->render($templateName, $data);
     }
 
-    public function actionContact($action)
+    public function actionContact($templateName)
     {
-        $this->view->render($action);
+        $this->view->render($templateName);
     }
 
-    public function actionAbout($action)
+    public function actionAbout($templateName)
     {
-        $this->view->render($action);
+        $this->view->render($templateName);
     }
 
-    public function actionPortfolio($action)
+    public function actionPortfolio($templateName)
     {
-        $this->view->render($action);
+        $this->view->render($templateName);
     }
     
 }
