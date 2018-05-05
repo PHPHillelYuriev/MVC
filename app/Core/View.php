@@ -1,7 +1,9 @@
-<?php 
+<?php
+namespace Core;
+ 
 class View
 {
-    public function render($template, $data = null)
+    public function render(string $template, array $data = null)
     {
         $content = $this->getTemplatePath($template);        
 
@@ -16,12 +18,12 @@ class View
         }        
     }
 
-    public function getTemplatePath($template)
+    public function getTemplatePath(string $template) : string
     {
         return ROOT . '/../src/views/' . $template . '.php';
     }
 
-    public function getLayoutPath()
+    public function getLayoutPath() : string
     {
         return ROOT . '/../src/views/layout.php';
     }

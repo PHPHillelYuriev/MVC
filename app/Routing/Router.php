@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+namespace Routing;
+
 class Router 
 {
     private $routes;
@@ -6,12 +9,12 @@ class Router
     public function __construct() 
     {
         $routesPath = ROOT . '/routes.php';
-        $this->routes = include($routesPath);
+        $this->routes = require($routesPath);
     }
 
     //Returns request string
 
-    private function getURI ()
+    private function getURI () : string
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
             return trim($_SERVER['REQUEST_URI'], '/');
@@ -43,23 +46,18 @@ class Router
                 
                 //Подключить файл класса-контроллера
                 
-                $controllerFile = '../src/Controller/MainController.php';
-                
-                if (file_exists($controllerFile)) {
-                    include_once($controllerFile);
+                $controllerPath = 'Controllers\MainController';
+
+                if (class_exists($controllerPath)) {
+                    
+                    $result = new $controllerPath($action);                                
+                    $result->$actionName();
+ 
+                    if ($result != null) {
+                        break;
+                    }
                 }
-
-                //Создать обьект, вызвать метод (т.е. action)
-
-                $result = new MainController();
-                $result->$actionName($action);
-
-                if ($result != null) {
-                    break;
-                }
-            }
-
-            
+            }           
         }
     }
 }
